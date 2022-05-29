@@ -59,10 +59,12 @@ function execute(overlay_class_name, purge_event_name, script_id) {
 
         let printWindow = window.open('', 'PRINT', `height=650,width=900,top=100,left=150`);
 
-        const links = 
-                [...document.getElementsByTagName('link'), ...document.getElementsByTagName('style')]
-                .filter(_=>_.rel?.includes("stylesheet") || _.innerText.length > 1)
-                .map(_=>_.cloneNode(true));
+        const links =
+            [
+                ...document.getElementsByTagName('link'),
+                ...document.getElementsByTagName('style'),
+                ...document.head.getElementsByTagName('script')
+            ].map(_ => _.cloneNode(true));
 
         printWindow.document.write(`
 <html>
@@ -88,13 +90,13 @@ function execute(overlay_class_name, purge_event_name, script_id) {
     const utility_mouseOut = (evt) => { evt.target.classList.remove(overlay_class_name); }
 
     /** @param {MouseEvent} evt */
-    const utility_mouseClick = (evt) => { 
-        printSection(evt.target); 
+    const utility_mouseClick = (evt) => {
+        printSection(evt.target);
         document.dispatchEvent(new Event(purge_event_name));
     }
     /** @param {KeyboardEvent} evt */
     const utility_escKeyPress = (evt) => {
-        if(evt.key === "Escape") document.dispatchEvent(new Event(purge_event_name));
+        if (evt.key === "Escape") document.dispatchEvent(new Event(purge_event_name));
     }
 
     document.addEventListener('mouseover', utility_mouseOver, false);
@@ -127,11 +129,11 @@ chrome.action.onClicked.addListener((tab) => {
                 console.log("not yet injected.. injecting now");
                 await injectCSS(tab.id);
                 chrome.scripting.executeScript({ target: { tabId: tab.id }, function: inject, args: [SCRIPT_ID] });
-                
-                chrome.action.setBadgeText({text: 'ON', tabId: tab.id});
-                chrome.action.setBadgeBackgroundColor({color: '#4688F1', tabId: tab.id});
 
-                
+                chrome.action.setBadgeText({ text: 'ON', tabId: tab.id });
+                chrome.action.setBadgeBackgroundColor({ color: '#4688F1', tabId: tab.id });
+
+
                 chrome.scripting.executeScript({
                     target: { tabId: tab.id },
                     function: execute,
@@ -146,7 +148,7 @@ chrome.action.onClicked.addListener((tab) => {
                     ]
                 });
                 await removeCSS(tab.id);
-                chrome.action.setBadgeText({text: '', tabId: tab.id});
+                chrome.action.setBadgeText({ text: '', tabId: tab.id });
             }
         });
 });
