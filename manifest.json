@@ -10,7 +10,7 @@
           }
     },
     "manifest_version": 3,
-    "version": "0.1",
+    "version": "0.2",
     "description": "Extract a portion / section of a webpage into a PDF file",
     "permissions": [
       "activeTab",
