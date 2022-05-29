@@ -22,9 +22,7 @@ async function injectCSS(tabId) {
     try {
         await chrome.scripting.insertCSS({
             target: { tabId },
-            css: `.${OVERLAY_CLASS_NAME} { 
-                border: 4px dashed red !important;
-            }`,
+            css: `.${OVERLAY_CLASS_NAME} { border: 4px dashed red !important; }`,
         });
     } catch (err) {
         console.error(`failed to insert CSS: ${err}`);
@@ -35,9 +33,7 @@ async function removeCSS(tabId) {
     try {
         await chrome.scripting.removeCSS({
             target: { tabId },
-            css: `.${OVERLAY_CLASS_NAME} { 
-    border: 4px dashed red !important;
-}`,
+            css: `.${OVERLAY_CLASS_NAME} { border: 4px dashed red !important; }`,
         });
     } catch (err) {
         console.error(`failed to remove CSS: ${err}`);
