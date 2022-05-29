@@ -98,7 +98,6 @@ function execute(overlay_class_name, purge_event_name, script_id) {
     document.addEventListener('click', utility_mouseClick, false);
     document.addEventListener('keydown', utility_escKeyPress, false);
 
-    // TODO: register escape key as the undoing of the above!.
     document.addEventListener(purge_event_name, () => {
         document.removeEventListener('mouseover', utility_mouseOver);
         document.removeEventListener('mouseout', utility_mouseOut);
@@ -135,7 +134,6 @@ chrome.action.onClicked.addListener((tab) => {
                     args: [OVERLAY_CLASS_NAME, PURGE_EVENT_NAME, SCRIPT_ID]
                 });
             } else {
-                // TODO: change icon to indicate that we are active.
                 // injected and active.. removing
                 chrome.scripting.executeScript({
                     target: { tabId: tab.id },
