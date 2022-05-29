@@ -124,6 +124,11 @@ chrome.action.onClicked.addListener((tab) => {
                 console.log("not yet injected.. injecting now");
                 await injectCSS(tab.id);
                 chrome.scripting.executeScript({ target: { tabId: tab.id }, function: inject, args: [SCRIPT_ID] });
+                
+                chrome.action.setBadgeText({text: 'ON', tabId: tab.id});
+                chrome.action.setBadgeBackgroundColor({color: '#4688F1', tabId: tab.id});
+
+                
                 chrome.scripting.executeScript({
                     target: { tabId: tab.id },
                     function: execute,
@@ -139,6 +144,7 @@ chrome.action.onClicked.addListener((tab) => {
                     ]
                 });
                 await removeCSS(tab.id);
+                chrome.action.setBadgeText({text: '', tabId: tab.id});
             }
         });
 });
