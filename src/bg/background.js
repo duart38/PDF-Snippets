@@ -72,10 +72,12 @@ function execute(overlay_class_name, purge_event_name, script_id) {
     </body>
 </html>`);
 
-        printWindow.document.head.append(...links)
+        printWindow.document.head.append(...links);
 
-        printWindow.print();
-        printWindow.close();
+        setTimeout(() => {
+            printWindow.print();
+            printWindow.close();
+        }, 50);
     }
 
 
