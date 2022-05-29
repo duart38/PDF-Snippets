@@ -1,6 +1,7 @@
 # PDF Snippets
 A Chrome extension that allows you to create PDF snippets of a portion of any web-page.
 
+<img src="./showcase.gif">
 
 
 ### Icon credits
