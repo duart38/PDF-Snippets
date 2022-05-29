@@ -88,16 +88,22 @@ function execute(overlay_class_name, purge_event_name, script_id) {
         printSection(evt.target); 
         document.dispatchEvent(new Event(purge_event_name));
     }
+    /** @param {KeyboardEvent} evt */
+    const utility_escKeyPress = (evt) => {
+        if(evt.key === "Escape") document.dispatchEvent(new Event(purge_event_name));
+    }
 
     document.addEventListener('mouseover', utility_mouseOver, false);
     document.addEventListener('mouseout', utility_mouseOut, false);
     document.addEventListener('click', utility_mouseClick, false);
+    document.addEventListener('keydown', utility_escKeyPress, false);
 
     // TODO: register escape key as the undoing of the above!.
     document.addEventListener(purge_event_name, () => {
         document.removeEventListener('mouseover', utility_mouseOver);
         document.removeEventListener('mouseout', utility_mouseOut);
         document.removeEventListener('click', utility_mouseClick);
+        document.removeEventListener('keydown', utility_escKeyPress);
 
         // in case one or more elements got the hover class still attached
         for (let e of document.getElementsByClassName(overlay_class_name)) e.classList.remove(overlay_class_name);
