@@ -36,7 +36,10 @@ async function removeCSS(tabId) {
     try {
         await chrome.scripting.removeCSS({
             target: { tabId },
-            css: `.${OVERLAY_CLASS_NAME} { border: 4px dashed red !important; }`,
+            css: `.${OVERLAY_CLASS_NAME} { 
+                outline: 4px double red !important;
+                outline-radius: 5px !important;
+            }`,
         });
     } catch (err) {
         console.error(`failed to remove CSS: ${err}`);
