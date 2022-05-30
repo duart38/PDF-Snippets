@@ -1,7 +1,10 @@
 const OVERLAY_CLASS_NAME = '__pdf_extract_hover_overlay';
 const SCRIPT_ID = '111_pdf_a_portion_111';
 const PURGE_EVENT_NAME = '__pdf_extract_purge';
-
+const CSS_OVERLAY = `.${OVERLAY_CLASS_NAME} { 
+    outline: 4px double red !important;
+    outline-radius: 5px !important;
+}`
 
 
 /**
@@ -22,10 +25,7 @@ async function injectCSS(tabId) {
     try {
         await chrome.scripting.insertCSS({
             target: { tabId },
-            css: `.${OVERLAY_CLASS_NAME} { 
-                outline: 4px double red !important;
-                outline-radius: 5px !important;
-            }`,
+            css: CSS_OVERLAY,
         });
     } catch (err) {
         console.error(`failed to insert CSS: ${err}`);
@@ -36,10 +36,7 @@ async function removeCSS(tabId) {
     try {
         await chrome.scripting.removeCSS({
             target: { tabId },
-            css: `.${OVERLAY_CLASS_NAME} { 
-                outline: 4px double red !important;
-                outline-radius: 5px !important;
-            }`,
+            css: CSS_OVERLAY,
         });
     } catch (err) {
         console.error(`failed to remove CSS: ${err}`);
