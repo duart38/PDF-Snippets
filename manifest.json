@@ -17,7 +17,7 @@
       "256": "/icons/256.png"
     },
     "manifest_version": 3,
-    "version": "0.2",
+    "version": "0.3",
     "description": "Extract a portion / section of a webpage into a PDF file",
     "permissions": [
       "activeTab",
